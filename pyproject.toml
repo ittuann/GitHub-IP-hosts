@@ -1,0 +1,60 @@
+[tool.poetry]
+name = "github-ip-hosts"
+version = "0.1.1"
+description = "GitHub IP hosts"
+license = "MIT"
+authors = ["ittuann <ittuann@outlook.com>"]
+readme = "README.md"
+
+repository = "https://github.com/ittuann/GitHub-IP-hosts"
+
+[tool.poetry.dependencies]
+python = "^3.11"
+ping3 = "^4.0.8"
+requests = "^2.31.0"
+
+[tool.poetry.group.dev.dependencies]
+black = "^24.4.2"
+ruff = "^0.4.4"
+mypy = "^1.10.0"
+autoflake = "^2.3.1"
+pyupgrade = "^3.15.2"
+
+[tool.black]
+line-length = 120
+
+[tool.mypy]
+pretty = true
+warn_redundant_casts = true
+warn_unused_ignores = true
+
+[tool.ruff]
+line-length = 120
+
+[tool.ruff.lint]
+select = [
+  # pycodestyle
+  "E",
+  # Pyflakes
+  "F",
+  # pyupgrade
+  "UP",
+  # flake8-bugbear
+  "B",
+  # flake8-simplify
+  "SIM",
+  # isort
+  "I",
+]
+extend-select = [
+  # pydocstyle
+  "D",
+]
+ignore = ["F401", "UP009", "D415"]
+
+[tool.ruff.lint.pydocstyle]
+convention = "google"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
