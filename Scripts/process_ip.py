@@ -44,6 +44,28 @@ def select_best_ip(ip_list: List[Dict[str, str]]) -> List[Dict[str, str]]:
     return best_ips
 
 
+def select_first_ip(ip_list: List[Dict[str, str]]) -> List[Dict[str, str]]:
+    """选择每个URL的第一个IP地址。
+
+    GitHub runners are placed in Azure. Ping doesn't work in azure by design.
+    https://github.com/actions/runner-images/issues/1519#issuecomment-752644218
+
+    Parameters:
+        ip_list (List[Dict[str, str]]): 包含URL和IP地址的字典列表。
+
+    Returns:
+        List[Dict[str, str]]: 包含URL和第一个IP地址的字典列表。
+    """
+    first_ips = {}
+    for record in ip_list:
+        url, ip = record["url"], record["ip"]
+        if url not in first_ips:
+            first_ips[url] = ip
+            logging.info(f"{url} 第一个IP地址: {ip}")
+
+    return [{"url": url, "ip": ip} for url, ip in first_ips.items()]
+
+
 def merge_deduplicate_ips(ips1: List[Dict[str, str]], ips2: List[Dict[str, str]]) -> List[Dict[str, str]]:
     """合并并去重从两个API得到的IP地址。
 

@@ -43,11 +43,10 @@ def fetch_dns_records(dns_api: str, url: str, retries_num: int = 3) -> List[DNSR
 
         except requests.Timeout as e:
             logging.warning(f"请求超时 ({attempt_num}/{retries_num}): {e}")
-            if attempt_num < retries_num:
-                logging.warning("等待 1 秒后重试...")
-                time.sleep(1)
+            time.sleep(1)
         except requests.RequestException as e:
             logging.warning(f"{url} 请求失败 ({attempt_num}/{retries_num}): {type(e).__name__} - {e}")
+            time.sleep(1)
 
         if attempt_num >= retries_num:
             logging.error(f"{url}: 在 {retries_num} 次尝试后无法完成请求")
@@ -57,7 +56,7 @@ def fetch_dns_records(dns_api: str, url: str, retries_num: int = 3) -> List[DNSR
 
 
 def get_all_ips(urls: List[str], dns_api: str, retries_num: int = 3) -> List[Dict[str, str]]:
-    """获取每个URL的最佳IP地址。
+    """获取指定URL列表的IP地址
 
     Parameters:
         urls (List[str]): 要解析的URL列表。

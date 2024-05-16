@@ -51,8 +51,8 @@ def get_hosts_head_str(hosts_name: str) -> str:
     """
     return f"""# GitHub IP hosts Start
 # Auto update time: {get_time_str()}
-# IP可能会随时变化，请关注GitHub项目，以获取最新数据
-# GitHub  url: https://github.com/ittuann/GitHub-IP-hosts
-# Update  url: https://github.com/ittuann/GitHub-IP-hosts/{hosts_name}
+# IP 可能会随时变化，请关注 GitHub 项目，以获取最新数据
+# GitHub url: https://github.com/ittuann/GitHub-IP-hosts
+# Update url: https://github.com/ittuann/GitHub-IP-hosts/{hosts_name}
 
 """
