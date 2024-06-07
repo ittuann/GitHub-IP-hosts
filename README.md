@@ -1,6 +1,15 @@
 # 📄 GitHub IP hosts
 
-通过使用 GitHub Action 自动更新 hosts 文件，解决中国大陆访问 GitHub 时遇到的抽风问题，诸如访问缓慢、图片加载失败等等。
+通过使用 GitHub Action 每周自动更新 hosts 文件，解决中国大陆访问 GitHub 时遇到的抽风问题，诸如访问缓慢、图片加载失败等等。
+
+# 目录
+
+- [🛠️ 使用方法](#️-使用方法)
+  - [1. 复制下面的 hosts 内容](#1-复制下面的-hosts-内容)
+  - [2. 将内容粘贴到系统 hosts 文件中](#2-将内容粘贴到系统-hosts-文件中)
+    - [Windows 系统粘贴](#windows-系统粘贴)
+    - [Linux 系统粘贴](#linux-系统粘贴)
+- [🔭 进阶使用](#-进阶使用)
 
 # 🛠️ 使用方法
 
@@ -180,5 +189,5 @@
 # 🔭 进阶使用
 
 1. 通过 [SwitchHosts](https://github.com/oldj/SwitchHosts) 自动更新 hosts 文件。
-2. 只使用记录单一 IP 的 hosts 文件: 复制项目的 [hosts_single](https://github.com/ittuann/GitHub-IP-hosts/blob/main/hosts_single) 即可。
-3. 在本地/海外服务器运行脚本代码: 在项目根目录执行 `make` 命令即可。
+2. 只使用记录单一 IP 的 hosts 文件: 复制项目内的 [hosts_single](https://github.com/ittuann/GitHub-IP-hosts/blob/main/hosts_single) 文件内容即可。
+3. 在本地/海外服务器运行项目脚本代码: 在项目根目录执行 `make` 命令即可。
