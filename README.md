@@ -21,15 +21,14 @@
 
 ```
 # GitHub IP hosts Start
-# Auto update time: 2024-06-17 10:28:46 UTC+08:00
+# Auto update time: 2024-06-19 17:23:48 UTC+08:00
 # IP 可能会随时变化，请关注 GitHub 项目，以获取最新数据
 # GitHub url: https://github.com/ittuann/GitHub-IP-hosts
 # Update url: https://raw.githubusercontent.com/ittuann/GitHub-IP-hosts/main/hosts
 
 140.82.112.26   alive.github.com
-140.82.114.26   alive.github.com
-140.82.113.5    api.github.com
-140.82.114.6    api.github.com
+140.82.113.25   alive.github.com
+140.82.112.6    api.github.com
 185.199.108.153 assets-cdn.github.com
 185.199.109.153 assets-cdn.github.com
 185.199.110.153 assets-cdn.github.com
@@ -73,57 +72,56 @@
 185.199.110.133 cloud.githubusercontent.com
 185.199.111.133 cloud.githubusercontent.com
 140.82.112.10   codeload.github.com
-140.82.113.10   codeload.github.com
-140.82.113.21   collector.github.com
+140.82.113.9    codeload.github.com
 140.82.114.21   collector.github.com
+140.82.114.22   collector.github.com
 185.199.108.133 desktop.githubusercontent.com
 185.199.109.133 desktop.githubusercontent.com
 185.199.110.133 desktop.githubusercontent.com
 185.199.111.133 desktop.githubusercontent.com
-140.82.112.22   education.github.com
-140.82.114.22   education.github.com
+140.82.113.21   education.github.com
+140.82.114.21   education.github.com
 185.199.108.133 favicons.githubusercontent.com
 185.199.109.133 favicons.githubusercontent.com
 185.199.110.133 favicons.githubusercontent.com
 185.199.111.133 favicons.githubusercontent.com
-140.82.113.4    gist.github.com
-140.82.114.3    gist.github.com
-16.182.67.241   github-cloud.s3.amazonaws.com
-3.5.10.10       github-cloud.s3.amazonaws.com
-3.5.25.119      github-cloud.s3.amazonaws.com
-3.5.28.42       github-cloud.s3.amazonaws.com
-52.216.37.113   github-cloud.s3.amazonaws.com
-52.216.94.91    github-cloud.s3.amazonaws.com
-52.217.115.145  github-cloud.s3.amazonaws.com
-52.217.120.33   github-cloud.s3.amazonaws.com
-52.217.162.33   github-cloud.s3.amazonaws.com
-52.217.205.129  github-cloud.s3.amazonaws.com
-52.217.227.97   github-cloud.s3.amazonaws.com
-52.217.234.169  github-cloud.s3.amazonaws.com
-52.217.72.28    github-cloud.s3.amazonaws.com
-52.217.73.116   github-cloud.s3.amazonaws.com
-54.231.138.17   github-cloud.s3.amazonaws.com
-54.231.171.1    github-cloud.s3.amazonaws.com
-16.182.101.65   github-com.s3.amazonaws.com
-16.182.38.89    github-com.s3.amazonaws.com
-3.5.28.32       github-com.s3.amazonaws.com
-3.5.29.21       github-com.s3.amazonaws.com
-3.5.30.143      github-com.s3.amazonaws.com
-3.5.6.196       github-com.s3.amazonaws.com
-52.216.187.75   github-com.s3.amazonaws.com
-52.216.214.17   github-com.s3.amazonaws.com
-52.216.76.180   github-com.s3.amazonaws.com
-52.217.224.1    github-com.s3.amazonaws.com
-52.217.48.132   github-com.s3.amazonaws.com
-52.217.69.212   github-com.s3.amazonaws.com
-52.217.84.220   github-com.s3.amazonaws.com
-54.231.169.241  github-com.s3.amazonaws.com
-54.231.170.185  github-com.s3.amazonaws.com
-54.231.194.33   github-com.s3.amazonaws.com
+140.82.112.3    gist.github.com
+3.5.11.148      github-cloud.s3.amazonaws.com
+3.5.2.146       github-cloud.s3.amazonaws.com
+3.5.25.132      github-cloud.s3.amazonaws.com
+3.5.28.249      github-cloud.s3.amazonaws.com
+52.216.108.203  github-cloud.s3.amazonaws.com
+52.216.54.185   github-cloud.s3.amazonaws.com
+52.216.61.97    github-cloud.s3.amazonaws.com
+52.217.117.121  github-cloud.s3.amazonaws.com
+52.217.164.25   github-cloud.s3.amazonaws.com
+52.217.175.17   github-cloud.s3.amazonaws.com
+52.217.197.57   github-cloud.s3.amazonaws.com
+52.217.223.33   github-cloud.s3.amazonaws.com
+52.217.227.201  github-cloud.s3.amazonaws.com
+52.217.236.65   github-cloud.s3.amazonaws.com
+54.231.132.49   github-cloud.s3.amazonaws.com
+54.231.196.41   github-cloud.s3.amazonaws.com
+16.182.70.201   github-com.s3.amazonaws.com
+3.5.27.138      github-com.s3.amazonaws.com
+3.5.28.69       github-com.s3.amazonaws.com
+52.216.114.123  github-com.s3.amazonaws.com
+52.216.136.75   github-com.s3.amazonaws.com
+52.216.248.12   github-com.s3.amazonaws.com
+52.216.56.17    github-com.s3.amazonaws.com
+52.217.123.89   github-com.s3.amazonaws.com
+52.217.130.105  github-com.s3.amazonaws.com
+52.217.131.9    github-com.s3.amazonaws.com
+52.217.167.169  github-com.s3.amazonaws.com
+52.217.169.241  github-com.s3.amazonaws.com
+52.217.231.73   github-com.s3.amazonaws.com
+52.217.87.236   github-com.s3.amazonaws.com
+54.231.131.9    github-com.s3.amazonaws.com
+54.231.134.89   github-com.s3.amazonaws.com
 192.0.66.2      github.blog
-140.82.113.3    github.com
+140.82.114.3    github.com
+140.82.114.4    github.com
 140.82.112.18   github.community
-140.82.113.17   github.community
 185.199.108.154 github.githubassets.com
 185.199.109.154 github.githubassets.com
 185.199.110.154 github.githubassets.com
@@ -144,7 +142,7 @@
 185.199.109.153 githubstatus.com
 185.199.110.153 githubstatus.com
 185.199.111.153 githubstatus.com
-140.82.112.25   live.github.com
+140.82.112.26   live.github.com
 140.82.113.26   live.github.com
 185.199.108.133 media.githubusercontent.com
 185.199.109.133 media.githubusercontent.com
