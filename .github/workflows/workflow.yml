@@ -3,6 +3,8 @@ name: "Auto-update-hosts"
 on:
   push:
     branches: [main]
+  pull_request:
+    branches: [main]
   schedule:
     - cron: "0 2 * * 1"
 
@@ -36,7 +38,10 @@ jobs:
         if: steps.cached-poetry-dependencies.outputs.cache-hit != 'true'
         run: poetry install --no-root --no-interaction
 
-      - name: Run script
+      - name: Lint
+        run: make lint
+
+      - name: Run Script
         run: poetry run python ./Scripts/main.py --is_in_gha true
 
       - name: Auto Commit

@@ -12,6 +12,7 @@ from process_ip import (
     reorder_ips_with_best_first,
     select_best_ip,
     select_first_ip,
+    select_limited_ips,
 )
 from update_readme import get_hosts_head_str, update_readme
 
@@ -53,8 +54,11 @@ def main():
     with open(Path("hosts_single"), "w", encoding="utf-8") as file:
         file.write(get_hosts_head_str("hosts_single") + host_single_strings + "\n\n# GitHub IP hosts End")
 
+    logging.info("限制每个URL的限定数量的IP地址")
+    ips_res_limited = select_limited_ips(ips_res, 4)
+
     logging.info("格式化host字符串")
-    host_strings = format_host_strings(ips_res)
+    host_strings = format_host_strings(ips_res_limited)
 
     logging.info("写入hosts文件")
     host_content = get_hosts_head_str("hosts") + host_strings + "\n\n# GitHub IP hosts End"

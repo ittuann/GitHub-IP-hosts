@@ -66,6 +66,32 @@ def select_first_ip(ip_list: List[Dict[str, str]]) -> List[Dict[str, str]]:
     return [{"url": url, "ip": ip} for url, ip in first_ips.items()]
 
 
+def select_limited_ips(ip_list: List[Dict[str, str]], max_ips_per_url: int = 4) -> List[Dict[str, str]]:
+    """选择每个URL的限定数量的IP地址
+
+    Parameters:
+        ip_list (List[Dict[str, str]]): 包含URL和IP地址的字典列表。
+        max_ips_per_url (int): 每个URL允许的最大IP地址数量 默认为4。
+
+    Returns:
+        List[Dict[str, str]]: 根据限定数量选择的URL和IP地址的字典列表。
+    """
+    ips_per_url = {}
+    for record in ip_list:
+        url, ip = record["url"], record["ip"]
+        if url not in ips_per_url:
+            ips_per_url[url] = [ip]
+        elif len(ips_per_url[url]) < max_ips_per_url:
+            ips_per_url[url].append(ip)
+
+    result = []
+    for url, ips in ips_per_url.items():
+        for ip in ips:
+            result.append({"url": url, "ip": ip})
+
+    return result
+
+
 def merge_deduplicate_ips(ips1: List[Dict[str, str]], ips2: List[Dict[str, str]]) -> List[Dict[str, str]]:
     """合并并去重从两个API得到的IP地址。
 
