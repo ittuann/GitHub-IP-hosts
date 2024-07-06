@@ -7,6 +7,7 @@ on:
     branches: [main]
   schedule:
     - cron: "0 2 * * 1"
+  workflow_dispatch:
 
 jobs:
   update-hosts:
@@ -45,6 +46,7 @@ jobs:
         run: poetry run python ./Scripts/main.py --is_in_gha true
 
       - name: Auto Commit
+        if: github.event_name != 'pull_request'
         run: |
           git config user.name 'github-actions[bot]'
           git config user.email 'github-actions[bot]@users.noreply.github.com'
@@ -53,6 +55,7 @@ jobs:
           git commit -m "Auto update hosts ($CURRENT_TIME UTC+8)"
 
       - name: Push changes
+        if: github.event_name != 'pull_request'
         uses: ad-m/github-push-action@master
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
