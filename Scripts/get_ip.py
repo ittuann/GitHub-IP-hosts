@@ -10,10 +10,9 @@ Note:
 
 import logging
 import time
-from typing import TypedDict
 
 import requests  # type: ignore
-from pydantic import BaseModel, HttpUrl, ValidationError
+from pydantic import BaseModel, ValidationError
 
 
 class DNSRecord(BaseModel):
@@ -82,7 +81,7 @@ def get_all_ips(urls: list[str], dns_api: str, retries_num: int = 3) -> list[dic
     Returns:
         List[Dict[str, str]]: 包含URL和最佳IP地址的字典列表。
     """
-    results = []
+    results: list[dict[str, str]] = []
 
     # 解析每个URL的IP地址
     for url in urls:
