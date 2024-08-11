@@ -14,7 +14,7 @@ Note:
     License: MIT License.
 
 Example:
-    $ poetry run python ./Scripts/main.py --max_ips_per_url 4 --is_in_gha False
+    $ poetry run python ./Scripts/main.py --max_ips_per_url=4 --is_in_gha=False
 """
 
 import argparse

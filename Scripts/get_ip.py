@@ -13,9 +13,10 @@ import time
 from typing import TypedDict
 
 import requests  # type: ignore
+from pydantic import BaseModel, HttpUrl, ValidationError
 
 
-class DNSRecord(TypedDict):
+class DNSRecord(BaseModel):
     """A dictionary type for storing DNS record information."""
 
     name: str
@@ -47,7 +48,8 @@ def fetch_dns_records(dns_api: str, url: str, retries_num: int = 3) -> list[DNSR
             )
             response.raise_for_status()  # 检查请求是否成功
             data = response.json()
-            return [answer for answer in data.get("Answer", []) if answer["type"] == 1]
+            records = [DNSRecord(**answer) for answer in data.get("Answer", []) if answer["type"] == 1]
+            return records
 
         except requests.Timeout as e:
             logging.warning(f"请求超时 ({attempt_num}/{retries_num}): {e}")
@@ -55,6 +57,9 @@ def fetch_dns_records(dns_api: str, url: str, retries_num: int = 3) -> list[DNSR
         except requests.RequestException as e:
             logging.warning(f"{url} 请求失败 ({attempt_num}/{retries_num}): {type(e).__name__} - {e}")
             time.sleep(1)
+        except ValidationError as e:
+            logging.error(f"Pydantic 数据验证失败: {e}")
+            return []
 
         if attempt_num >= retries_num:
             logging.error(f"{url}: 在 {retries_num} 次尝试后无法完成请求")
@@ -82,18 +87,21 @@ def get_all_ips(urls: list[str], dns_api: str, retries_num: int = 3) -> list[dic
     # 解析每个URL的IP地址
     for url in urls:
         try:
-            answers = fetch_dns_records(dns_api, url, retries_num)
+            records = fetch_dns_records(dns_api, url, retries_num)
+
+            # 检查records是否为空
+            if not records:
+                raise RuntimeError(f"没有得到 {url} 的任何A记录")
 
             # 打印得到的A记录数量
-            logging.info(f"{url} 得到 {len(answers)} 个A记录")
-            for idx, answer in enumerate(answers, start=1):
-                logging.info(f"{url} - {idx}: {answer['data']}, TTL: {answer['TTL']}")
+            logging.info(f"{url} 得到 {len(records)} 个A记录")
+            for idx, record in enumerate(records, start=1):
+                logging.info(f"{url} - {idx}: {record.data}, TTL: {record.TTL}")
 
-            for answer in answers:
-                results.append({"url": url, "ip": answer["data"]})
+            results.extend({"url": url, "ip": record.data} for record in records)
 
         except RuntimeError as e:
-            logging.error(f"{url} 无法获取记录：{e}")
+            logging.error(f"{url} 无法解析IP地址: {e}")
             results.append({"url": url, "ip": "# "})
 
     return results
