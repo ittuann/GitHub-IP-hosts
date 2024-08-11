@@ -31,7 +31,6 @@ line-length = 120
 [tool.mypy]
 pretty = true
 warn_redundant_casts = true
-warn_unused_ignores = true
 
 [tool.autoflake]
 check-diff = true
