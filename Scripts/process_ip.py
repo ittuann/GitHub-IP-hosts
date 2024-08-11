@@ -1,12 +1,19 @@
-"""Process IP addresses"""
+"""Process IP addresses.
+
+This module contains functions for processing IP addresses.
+
+Note:
+    File   : process_ip.py
+    Author : ittuann <ittuann@outlook.com>
+    License: MIT License.
+"""
 
 import logging
-from typing import Dict, List
 
 from ping3 import ping  # type: ignore
 
 
-def select_best_ip(ip_list: List[Dict[str, str]]) -> List[Dict[str, str]]:
+def select_best_ip(ip_list: list[dict[str, str]]) -> list[dict[str, str]]:
     """选择每个URL的最佳IP地址。
 
     Parameters:
@@ -16,7 +23,7 @@ def select_best_ip(ip_list: List[Dict[str, str]]) -> List[Dict[str, str]]:
         List[Dict[str, str]]: 包含URL和最佳IP地址的字典列表。
     """
     best_ips = []
-    url_to_ips: Dict[str, List[str]] = {}
+    url_to_ips: dict[str, list[str]] = {}
 
     for record in ip_list:
         url = record["url"]
@@ -44,7 +51,7 @@ def select_best_ip(ip_list: List[Dict[str, str]]) -> List[Dict[str, str]]:
     return best_ips
 
 
-def select_first_ip(ip_list: List[Dict[str, str]]) -> List[Dict[str, str]]:
+def select_first_ip(ip_list: list[dict[str, str]]) -> list[dict[str, str]]:
     """选择每个URL的第一个IP地址。
 
     GitHub runners are placed in Azure. Ping doesn't work in azure by design.
@@ -66,7 +73,7 @@ def select_first_ip(ip_list: List[Dict[str, str]]) -> List[Dict[str, str]]:
     return [{"url": url, "ip": ip} for url, ip in first_ips.items()]
 
 
-def select_limited_ips(ip_list: List[Dict[str, str]], max_ips_per_url: int = 4) -> List[Dict[str, str]]:
+def select_limited_ips(ip_list: list[dict[str, str]], max_ips_per_url: int = 4) -> list[dict[str, str]]:
     """选择每个URL的限定数量的IP地址
 
     Parameters:
@@ -92,7 +99,7 @@ def select_limited_ips(ip_list: List[Dict[str, str]], max_ips_per_url: int = 4) 
     return result
 
 
-def merge_deduplicate_ips(ips1: List[Dict[str, str]], ips2: List[Dict[str, str]]) -> List[Dict[str, str]]:
+def merge_deduplicate_ips(ips1: list[dict[str, str]], ips2: list[dict[str, str]]) -> list[dict[str, str]]:
     """合并并去重从两个API得到的IP地址。
 
     Parameters:
@@ -109,8 +116,8 @@ def merge_deduplicate_ips(ips1: List[Dict[str, str]], ips2: List[Dict[str, str]]
 
 
 def reorder_ips_with_best_first(
-    ips_merged: List[Dict[str, str]], ips_best: List[Dict[str, str]]
-) -> List[Dict[str, str]]:
+    ips_merged: list[dict[str, str]], ips_best: list[dict[str, str]]
+) -> list[dict[str, str]]:
     """重新排序IP地址列表 将每个URL的最佳IP地址放置在前面。
 
     Parameters:
@@ -134,7 +141,7 @@ def reorder_ips_with_best_first(
     return ips_res
 
 
-def format_host_strings(ip_list: List[Dict[str, str]]) -> str:
+def format_host_strings(ip_list: list[dict[str, str]]) -> str:
     """将列表中的字典中的IP地址和URL转换为host格式的字符串 并确保每个URL的开头对齐。
 
     Parameters:

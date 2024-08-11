@@ -1,14 +1,22 @@
-"""Records the IP addresses."""
+"""Records the IP addresses.
+
+This script fetches and records the IP addresses of various GitHub-related URLs using DNS-over-HTTPS APIs.
+
+Note:
+    File   : get_ip.py
+    Author : ittuann <ittuann@outlook.com>
+    License: MIT License.
+"""
 
 import logging
 import time
-from typing import Dict, List, TypedDict
+from typing import TypedDict
 
 import requests  # type: ignore
 
 
 class DNSRecord(TypedDict):
-    """DNS record dictionary."""
+    """A dictionary type for storing DNS record information."""
 
     name: str
     type: int
@@ -16,8 +24,8 @@ class DNSRecord(TypedDict):
     data: str
 
 
-def fetch_dns_records(dns_api: str, url: str, retries_num: int = 3) -> List[DNSRecord]:
-    """使用Cloudflare的DNS-over-HTTPS API获取指定URL的A记录。
+def fetch_dns_records(dns_api: str, url: str, retries_num: int = 3) -> list[DNSRecord]:
+    """使用DNS-over-HTTPS API获取指定URL的A记录。
 
     Parameters:
         dns_api (str): DNS-over-HTTPS API的URL。
@@ -55,7 +63,7 @@ def fetch_dns_records(dns_api: str, url: str, retries_num: int = 3) -> List[DNSR
     return []
 
 
-def get_all_ips(urls: List[str], dns_api: str, retries_num: int = 3) -> List[Dict[str, str]]:
+def get_all_ips(urls: list[str], dns_api: str, retries_num: int = 3) -> list[dict[str, str]]:
     """获取指定URL列表的IP地址
 
     Parameters:

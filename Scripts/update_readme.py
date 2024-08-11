@@ -1,4 +1,12 @@
-"""Update the status part in README.md file."""
+"""Update the status part in README.md file.
+
+Update the README.md file with the current status of hosts.
+
+Note:
+    File   : update_readme.py
+    Author : ittuann <ittuann@outlook.com>
+    License: MIT License.
+"""
 
 import re
 from datetime import datetime, timedelta, timezone

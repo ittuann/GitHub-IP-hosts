@@ -1,6 +1,17 @@
-"""Constants for the GitHub API."""
+"""Constants for the GitHub API.
 
-from typing import List
+This module contains constants used for interacting with the GitHub API and DNS-over-HTTPS APIs.
+
+Constants:
+    DNS_API_CLOUDFLARE (str): URL for Cloudflare DNS-over-HTTPS API.
+    DNS_API_GOOGLE (str): URL for Google DNS-over-HTTPS API.
+    GITHUB_URLS (List[str]): List of GitHub-related URLs.
+
+Note:
+    File   : constants.py
+    Author : ittuann <ittuann@outlook.com>
+    License: MIT License.
+"""
 
 # Cloudflare DNS-over-HTTPS API
 DNS_API_CLOUDFLARE: str = "https://cloudflare-dns.com/dns-query"
@@ -8,7 +19,7 @@ DNS_API_CLOUDFLARE: str = "https://cloudflare-dns.com/dns-query"
 # Google DNS-over-HTTPS API
 DNS_API_GOOGLE: str = "https://dns.google/resolve"
 
-GITHUB_URLS: List[str] = [
+GITHUB_URLS: list[str] = [
     "alive.github.com",
     "api.github.com",
     "assets-cdn.github.com",
