@@ -21,9 +21,9 @@ optional = true
 black = "^24.4.2"
 ruff = "^0.4.4"
 mypy = "^1.10.0"
+types-requests = "^2.32.0.20240712"
 autoflake = "^2.3.1"
 pyupgrade = "^3.16.0"
-types-requests = "^2.32.0.20240712"
 
 [tool.black]
 line-length = 120

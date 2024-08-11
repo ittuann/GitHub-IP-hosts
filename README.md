@@ -15,6 +15,9 @@
     - [Windows 系统粘贴](#windows-系统粘贴)
     - [Linux 系统粘贴](#linux-系统粘贴)
 - [🔭 进阶使用](#-进阶使用)
+  - 只记录单一 IP 的 [hosts](https://github.com/ittuann/GitHub-IP-hosts/blob/main/hosts_single) 文件
+  - 在本地/海外服务器自部署
+  - 默认返回所有响应中速度最快的 IP 地址
 
 # 🛠️ 使用方法
 
@@ -167,7 +170,8 @@
 
 # 🔭 进阶使用
 
-1. 通过 [SwitchHosts](https://github.com/oldj/SwitchHosts) 自动更新 hosts 文件。
-2. 只使用记录单一 IP 的 hosts 文件: 复制项目内的 [hosts_single](https://github.com/ittuann/GitHub-IP-hosts/blob/main/hosts_single) 文件内容即可。
-3. 完整的 workflows 工作流请参考 GitHub Action 的 CI/CD 配置。
-4. 在本地/海外服务器运行项目脚本代码: 在项目根目录执行 `make` 命令即可。
+1. 项目默认支持返回所有响应中速度最快的 IP 地址。
+2. 使用只记录单一 IP 的 hosts 文件: 复制项目内的 [hosts_single](https://github.com/ittuann/GitHub-IP-hosts/blob/main/hosts_single) 文件内容即可。
+3. 在本地/海外服务器自部署项目: 在项目根目录使用终端执行 `make` 命令即可。
+4. 通过 [SwitchHosts](https://github.com/oldj/SwitchHosts) 工具自动更新 hosts 文件。
+5. 完整的 workflows 工作流请参考 [GitHub Action](https://github.com/ittuann/GitHub-IP-hosts/actions) 的 CI/CD 配置。
