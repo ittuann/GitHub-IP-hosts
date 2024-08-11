@@ -12,7 +12,7 @@ import logging
 import time
 
 import requests  # type: ignore
-from pydantic import BaseModel, ValidationError
+from pydantic import BaseModel, HttpUrl, ValidationError
 
 
 class DNSRecord(BaseModel):
@@ -24,6 +24,23 @@ class DNSRecord(BaseModel):
     data: str
 
 
+def validate_str_url(url: str):
+    """验证给定的字符串是否是一个有效的 URL。
+
+    Raises:
+        ValueError: URL无效
+    """
+    if not url.startswith(("http://", "https://")):
+        url = f"https://{url}"  # 补充添加https协议头验证
+    try:
+        # 只尝试创建 HttpUrl 以验证
+        # 不会返回 HttpUrl 对象
+        _ = HttpUrl(url=url)
+    except ValidationError as e:
+        logging.error(f"无效的 URL: {url}, 错误信息: {str(e)}")
+        raise ValueError(f"无效的 URL: {url}") from e
+
+
 def fetch_dns_records(dns_api: str, url: str, retries_num: int = 3) -> list[DNSRecord]:
     """使用DNS-over-HTTPS API获取指定URL的A记录。
 
@@ -33,11 +50,19 @@ def fetch_dns_records(dns_api: str, url: str, retries_num: int = 3) -> list[DNSR
         retries_num (int): 最大重试次数。
 
     Raises:
+        ValueError: API或URL无效。
         RuntimeError: 无法完成GET请求。
 
     Returns:
         List[DNSRecord]: 包含A记录的字典列表。
     """
+    try:
+        validate_str_url(dns_api)
+        validate_str_url(url)
+    except ValueError as e:
+        logging.error(f"URL 验证无效: {e}")
+        raise ValueError(f"无效的 URL: {e}") from e
+
     for attempt_num in range(1, retries_num + 1):
         try:
             response = requests.get(
