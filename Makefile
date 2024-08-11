@@ -16,3 +16,4 @@ lint:
 	poetry run ruff check --fix ./Scripts
 	poetry run mypy ./Scripts
 	poetry run autoflake --remove-all-unused-imports --remove-unused-variables --recursive ./Scripts
+	poetry run pyupgrade --py311-plus ./Scripts/main.py

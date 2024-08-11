@@ -1,4 +1,21 @@
-"""Main script of the project."""
+"""Main script of the project.
+
+This script is the main entry point for the project.
+It fetches IP addresses for GitHub-related URLs using DNS-over-HTTPS APIs, processes the IP addresses,
+and updates the README file with the latest IP addresses.
+
+Functions:
+    main():
+        The main function that orchestrates the fetching, processing, and updating of IP addresses.
+
+Note:
+    File   : main.py
+    Author : ittuann <ittuann@outlook.com>
+    License: MIT License.
+
+Example:
+    $ poetry run python ./Scripts/main.py --max_ips_per_url=4 --is_in_gha=False
+"""
 
 import argparse
 import logging
@@ -23,6 +40,7 @@ def main():
 
     parser = argparse.ArgumentParser(description="GitHub IP hosts")
     parser.add_argument("--is_in_gha", type=bool, default=False, help="指定是否在GitHub Actions环境中运行")
+    parser.add_argument("--max_ips_per_url", type=int, default=4, help="指定每个URL的最大IP地址数量")
     args = parser.parse_args()
 
     logging.info("通过Cloudflare DNS-over-HTTPS 获取GitHub的IP地址")
@@ -55,7 +73,7 @@ def main():
         file.write(get_hosts_head_str("hosts_single") + host_single_strings + "\n\n# GitHub IP hosts End")
 
     logging.info("限制每个URL的限定数量的IP地址")
-    ips_res_limited = select_limited_ips(ips_res, 4)
+    ips_res_limited = select_limited_ips(ips_res, args.max_ips_per_url)
 
     logging.info("格式化host字符串")
     host_strings = format_host_strings(ips_res_limited)

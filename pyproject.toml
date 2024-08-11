@@ -10,8 +10,12 @@ repository = "https://github.com/ittuann/GitHub-IP-hosts"
 
 [tool.poetry.dependencies]
 python = "^3.11"
+requests = {extras = ["socks"], version = "^2.32.3"}
+pydantic = "^2.8.2"
 ping3 = "^4.0.8"
-requests = "^2.32.0"
+
+[tool.poetry.group.dev]
+optional = true
 
 [tool.poetry.group.dev.dependencies]
 black = "^24.4.2"
@@ -19,6 +23,7 @@ ruff = "^0.4.4"
 mypy = "^1.10.0"
 autoflake = "^2.3.1"
 pyupgrade = "^3.16.0"
+types-requests = "^2.32.0.20240712"
 
 [tool.black]
 line-length = 120
@@ -26,7 +31,9 @@ line-length = 120
 [tool.mypy]
 pretty = true
 warn_redundant_casts = true
-warn_unused_ignores = true
+
+[tool.autoflake]
+check-diff = true
 
 [tool.ruff]
 line-length = 120
