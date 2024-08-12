@@ -12,7 +12,7 @@ import logging
 import time
 
 import requests  # type: ignore
-from pydantic import BaseModel, HttpUrl, ValidationError
+from pydantic import BaseModel, Field, HttpUrl, ValidationError
 
 
 class DNSRecord(BaseModel):
@@ -20,7 +20,7 @@ class DNSRecord(BaseModel):
 
     name: str
     type: int
-    TTL: int
+    ttl: int = Field(alias="TTL")
     data: str
 
 
@@ -104,7 +104,7 @@ def get_all_ips(urls: list[str], dns_api: str, retries_num: int = 3) -> list[dic
         RuntimeError: 无法获取记录。
 
     Returns:
-        List[Dict[str, str]]: 包含URL和最佳IP地址的字典列表。
+        List[Dict[str, str]]: 包含URL和IP地址的字典列表。
     """
     results: list[dict[str, str]] = []
 
@@ -120,7 +120,7 @@ def get_all_ips(urls: list[str], dns_api: str, retries_num: int = 3) -> list[dic
             # 打印得到的A记录数量
             logging.info(f"{url} 得到 {len(records)} 个A记录")
             for idx, record in enumerate(records, start=1):
-                logging.info(f"{url} - {idx}: {record.data}, TTL: {record.TTL}")
+                logging.info(f"{url} - {idx}: {record.data}, TTL: {record.ttl}")
 
             results.extend({"url": url, "ip": record.data} for record in records)
 

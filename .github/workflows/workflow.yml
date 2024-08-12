@@ -42,6 +42,9 @@ jobs:
       - name: Lint
         run: make lint
 
+      - name: per-commit hooks
+        run: poetry run pre-commit run --verbose --all-files
+
       - name: Run Script
         run: poetry run python ./Scripts/main.py --is_in_gha true
 
