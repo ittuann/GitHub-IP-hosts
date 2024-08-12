@@ -12,7 +12,7 @@ import logging
 import time
 
 import requests  # type: ignore
-from pydantic import BaseModel, HttpUrl, ValidationError
+from pydantic import BaseModel, Field, HttpUrl, ValidationError
 
 
 class DNSRecord(BaseModel):
@@ -20,7 +20,7 @@ class DNSRecord(BaseModel):
 
     name: str
     type: int
-    ttl: int
+    ttl: int = Field(alias="TTL")
     data: str
 
 
