@@ -70,7 +70,7 @@ def main():
 
     logging.info("写入hosts_single文件")
     with open(Path("hosts_single"), "w", encoding="utf-8") as file:
-        file.write(get_hosts_head_str("hosts_single") + host_single_strings + "\n\n# GitHub IP hosts End")
+        file.write(get_hosts_head_str("hosts_single") + host_single_strings + "\n\n# GitHub IP hosts End\n")
 
     logging.info("限制每个URL的限定数量的IP地址")
     ips_res_limited = select_limited_ips(ips_res, args.max_ips_per_url)
@@ -79,7 +79,7 @@ def main():
     host_strings = format_host_strings(ips_res_limited)
 
     logging.info("写入hosts文件")
-    host_content = get_hosts_head_str("hosts") + host_strings + "\n\n# GitHub IP hosts End"
+    host_content = get_hosts_head_str("hosts") + host_strings + "\n\n# GitHub IP hosts End\n"
     with open(Path("hosts"), "w", encoding="utf-8") as file:
         file.write(host_content)
 

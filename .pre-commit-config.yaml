@@ -1,0 +1,54 @@
+default_language_version:
+  python: python3.11
+
+repos:
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v4.6.0
+    hooks:
+      - id: check-yaml
+      - id: check-toml
+      - id: trailing-whitespace
+      - id: end-of-file-fixer
+      - id: mixed-line-ending
+      - id: check-merge-conflict
+      - id: check-added-large-files
+      - id: detect-private-key
+      - id: check-docstring-first
+
+  - repo: https://github.com/python-poetry/poetry
+    rev: "1.8.0"
+    hooks:
+      - id: poetry-check
+
+  - repo: local
+    hooks:
+      - id: black
+        name: black format
+        entry: poetry run black --color
+        language: system
+        types: [python]
+
+      - id: autoflake
+        name: autoflake format
+        entry: poetry run autoflake --remove-all-unused-imports --remove-unused-variables
+        language: system
+        types: [python]
+
+      - id: ruff
+        name: ruff lint
+        entry: poetry run ruff check --fix
+        language: system
+        types: [python]
+
+      - id: mypy
+        name: mypy static type check lint
+        entry: poetry run mypy
+        language: system
+        types: [python]
+        verbose: true
+
+      - id: pyupgrade
+        name: pyupgrade
+        entry: poetry run pyupgrade --py311-plus
+        language: system
+        types: [python]
