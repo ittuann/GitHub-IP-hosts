@@ -12,10 +12,11 @@
 - [🛠️ 使用方法](#️-使用方法)
   - [1. 复制下面的 hosts 内容](#1-复制下面的-hosts-内容)
   - [2. 将内容粘贴到系统 hosts 文件中](#2-将内容粘贴到系统-hosts-文件中)
-    - [Windows 系统粘贴](#windows-系统粘贴)
-    - [Linux 系统粘贴](#linux-系统粘贴)
+    - [Windows 系统粘贴方法](#windows-系统粘贴方法)
+    - [Linux 系统粘贴方法](#linux-系统粘贴方法)
 - [🔭 进阶使用](#-进阶使用)
-  - 只记录单一 IP 的 [hosts](https://github.com/ittuann/GitHub-IP-hosts/blob/main/hosts_single) 文件
+  - 使用 [jsDelivr CDN](https://cdn.jsdelivr.net/gh/ittuann/GitHub-IP-hosts@main/hosts) 加速下载 hosts 文件
+  - 只记录单一 IP 的 [hosts_single](https://github.com/ittuann/GitHub-IP-hosts/blob/main/hosts_single) 文件
   - 在本地/海外服务器自部署
   - 默认返回所有响应中速度最快的 IP 地址
 
@@ -155,7 +156,7 @@
 
 ## 2. 将内容粘贴到系统 hosts 文件中
 
-### Windows 系统粘贴
+### Windows 系统粘贴方法
 
 1. 在搜索框中输入`记事本`，右键选择`以管理员身份运行`打开记事本。
 2. 在记事本中依次点击`文件` -> `打开`
@@ -165,7 +166,7 @@
 
 大部分情况下无需手动刷新 DNS，如未生效可在 CMD / PowerShell 中执行`ipconfig /flushdns`
 
-### Linux 系统粘贴
+### Linux 系统粘贴方法
 
 在终端中执行 `sudoedit /etc/hosts`，然后将复制的内容直接粘贴到文件末尾，保存即可。
 
@@ -174,5 +175,8 @@
 1. 项目默认支持返回所有响应中速度最快的 IP 地址。
 2. 使用只记录单一 IP 的 hosts 文件: 复制项目内的 [hosts_single](https://github.com/ittuann/GitHub-IP-hosts/blob/main/hosts_single) 文件内容即可。
 3. 在本地/海外服务器自部署项目: 在项目根目录使用终端执行 `make` 命令即可。
-4. 通过 [SwitchHosts](https://github.com/oldj/SwitchHosts) 工具自动更新 hosts 文件。
-5. 完整的 workflows 工作流请参考 [GitHub Action](https://github.com/ittuann/GitHub-IP-hosts/actions) 的 CI/CD 配置。
+4. 使用 jsDelivr CDN 加速下载 hosts 文件:
+   - [hosts](https://cdn.jsdelivr.net/gh/ittuann/GitHub-IP-hosts@main/hosts): `https://cdn.jsdelivr.net/gh/ittuann/GitHub-IP-hosts@main/hosts`
+   - [hosts_single](https://cdn.jsdelivr.net/gh/ittuann/GitHub-IP-hosts@main/hosts_single): `https://cdn.jsdelivr.net/gh/ittuann/GitHub-IP-hosts@main/hosts_single`
+5. 通过 [SwitchHosts](https://github.com/oldj/SwitchHosts) 工具自动更新 hosts 文件。
+6. 完整的 workflows 工作流请参考 [GitHub Action](https://github.com/ittuann/GitHub-IP-hosts/actions) 的 CI/CD 配置。
