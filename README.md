@@ -2,7 +2,7 @@
 
 [![GitHub Action][ci-image]][ci-url]
 
-[ci-image]: https://img.shields.io/github/actions/workflow/status/ittuann/GitHub-IP-hosts/workflow.yml?branch=main&label=Build%20Status&logo=github&style=for-the-badge
+[ci-image]: https://img.shields.io/github/actions/workflow/status/ittuann/GitHub-IP-hosts/workflow.yml?branch=main&label=Auto%20Build%20Status&logo=github&style=for-the-badge
 [ci-url]: https://github.com/ittuann/GitHub-IP-hosts/actions
 
 通过使用 GitHub Action 每周自动更新 hosts 文件，解决中国大陆访问 GitHub 时遇到的抽风问题，诸如访问缓慢、图片加载失败等等。
