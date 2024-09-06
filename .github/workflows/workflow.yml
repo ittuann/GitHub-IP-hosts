@@ -39,14 +39,14 @@ jobs:
         if: steps.cached-poetry-dependencies.outputs.cache-hit != 'true'
         run: poetry install --with dev --no-root --no-interaction
 
+      - name: Run Script
+        run: poetry run python -m scripts.main --is_in_gha=true
+
       - name: Lint
         run: make lint
 
       - name: per-commit hooks
         run: make pre-commit
-
-      - name: Run Script
-        run: poetry run python -m scripts.main --is_in_gha=true
 
       - name: Auto Commit
         if: github.event_name != 'pull_request' && github.ref == 'refs/heads/main'
