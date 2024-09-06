@@ -43,10 +43,10 @@ jobs:
         run: make lint
 
       - name: per-commit hooks
-        run: poetry run pre-commit run --verbose --all-files
+        run: make pre-commit
 
       - name: Run Script
-        run: poetry run python ./Scripts/main.py --is_in_gha true
+        run: poetry run python -m scripts.main --is_in_gha=true
 
       - name: Auto Commit
         if: github.event_name != 'pull_request' && github.ref == 'refs/heads/main'

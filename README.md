@@ -20,6 +20,9 @@
   - 在本地/海外服务器自部署
   - 默认返回所有响应中速度最快的 IP 地址
 
+> [!TIP]
+> Star 🌟 这个仓库，您将能在第一时间收到所有的更新和动态~
+
 # 🛠️ 使用方法
 
 使用方法仅需 2 步: 复制 [hosts](https://github.com/ittuann/GitHub-IP-hosts/blob/main/hosts) 文本 -> 将复制的文本粘贴至系统 hosts 文件

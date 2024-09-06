@@ -14,16 +14,16 @@ Note:
     License: MIT License.
 
 Example:
-    $ poetry run python ./Scripts/main.py --max_ips_per_url=4 --is_in_gha=False
+    $ poetry run python -m scripts.main --max_ips_per_url=4 --is_in_gha=False
 """
 
 import argparse
 import logging
 from pathlib import Path
 
-from constants import DNS_API_CLOUDFLARE, DNS_API_GOOGLE, GITHUB_URLS
-from get_ip import get_all_ips
-from process_ip import (
+from scripts.constants import DNS_API_CLOUDFLARE, DNS_API_GOOGLE, GITHUB_URLS
+from scripts.get_ip import get_all_ips
+from scripts.process_ip import (
     format_host_strings,
     merge_deduplicate_ips,
     reorder_ips_with_best_first,
@@ -31,7 +31,7 @@ from process_ip import (
     select_first_ip,
     select_limited_ips,
 )
-from update_readme import get_hosts_head_str, update_readme
+from scripts.update_readme import get_hosts_head_str, update_readme
 
 
 def main():
@@ -59,6 +59,7 @@ def main():
         logging.info("重新排序IP地址列表")
         ips_res = reorder_ips_with_best_first(ips_merged, ips_single)
     else:
+        logging.info("在GitHub Actions环境中运行")
         # https://github.com/actions/runner-images/issues/1519#issuecomment-752644218
         # GitHub runners are placed in Azure. Ping doesn't work in azure by design.
         ips_single = select_first_ip(ips_merged)
