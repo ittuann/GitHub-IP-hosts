@@ -1,7 +1,7 @@
 MAKEFLAGS = --warn-undefined-variables
 MAKEFLAGS += --no-builtin-rules
 
-.PHONY: run install lint pre-commi
+.PHONY: run install lint pre-commi unit-tests
 
 .DEFAULT_GOAL := run
 
@@ -20,3 +20,6 @@ lint:
 
 pre-commit:
 	poetry run pre-commit run --verbose --all-files
+
+unit-tests:
+	poetry run pytest

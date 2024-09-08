@@ -25,6 +25,9 @@ types-requests = "^2.32.0.20240712"
 autoflake = "^2.3.1"
 pyupgrade = "^3.16.0"
 pre-commit = "^3.8.0"
+pytest = "^8.3.2"
+pytest-cov = "^5.0.0"
+pytest-mock = "^3.14.0"
 
 [tool.black]
 line-length = 120
@@ -62,6 +65,9 @@ ignore = ["F401", "UP009", "D415"]
 
 [tool.ruff.lint.pydocstyle]
 convention = "google"
+
+[tool.pytest.ini_options]
+addopts = "-ra --cov=./scripts --cov-report=term --cov-report=xml --cov-report=html"
 
 [build-system]
 requires = ["poetry-core"]

@@ -48,6 +48,9 @@ jobs:
       - name: per-commit hooks
         run: make pre-commit
 
+      - name: Unit Test
+        run: make unit-tests
+
       - name: Auto Commit
         if: github.event_name != 'pull_request' && github.ref == 'refs/heads/main'
         run: |
