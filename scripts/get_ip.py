@@ -10,6 +10,7 @@ Note:
 
 import logging
 import time
+from dataclasses import dataclass
 
 import requests  # type: ignore
 from pydantic import BaseModel, Field, HttpUrl, ValidationError
@@ -24,6 +25,7 @@ class DNSRecord(BaseModel):
     data: str
 
 
+@dataclass
 class URLIPMapping:
     """Class for storing URL and IP address mappings."""
 
@@ -36,7 +38,7 @@ class URLIPMapping:
 
     def to_dict(self) -> dict[str, str]:
         """Convert the URLIPMapping object to a dictionary."""
-        return {"url": self.url, "ip": self.ip}
+        return {self.url: self.ip}
 
     def __repr__(self):
         """Return a string representation of the URLIPMapping object. __str__ is also set to this method."""
@@ -134,7 +136,7 @@ def fetch_dns_records(dns_api: str, url: str, retries_num: int = 3) -> list[DNSR
     return []
 
 
-def get_all_ips(urls: list[str], dns_api: str, retries_num: int = 3) -> list[dict[str, str]]:
+def get_all_ips(urls: list[str], dns_api: str, retries_num: int = 3) -> list[URLIPMapping]:
     """获取指定URL列表的IP地址
 
     Parameters:
@@ -148,7 +150,7 @@ def get_all_ips(urls: list[str], dns_api: str, retries_num: int = 3) -> list[dic
     Returns:
         List[Dict[str, str]]: 包含URL和IP地址的字典列表。
     """
-    results: list[dict[str, str]] = []
+    results: list[URLIPMapping] = []
 
     # 解析每个URL的IP地址
     for url in urls:
@@ -164,10 +166,10 @@ def get_all_ips(urls: list[str], dns_api: str, retries_num: int = 3) -> list[dic
             for idx, record in enumerate(records, start=1):
                 logging.info(f"{url} - {idx}: {record.data}, TTL: {record.ttl}")
 
-            results.extend({"url": url, "ip": record.data} for record in records)
+            results.extend(URLIPMapping(url, record.data) for record in records)
 
         except RuntimeError as e:
             logging.error(f"{url} 无法解析IP地址: {e}")
-            results.append({"url": url, "ip": "# "})
+            results.append(URLIPMapping(url, "# "))
 
     return results
