@@ -5,7 +5,7 @@
 [ci-image]: https://img.shields.io/github/actions/workflow/status/ittuann/GitHub-IP-hosts/workflow.yml?branch=main&label=Auto%20Build%20Status&logo=github&style=for-the-badge
 [ci-url]: https://github.com/ittuann/GitHub-IP-hosts/actions
 
-通过使用 GitHub Action 每周自动更新 hosts 文件，解决中国大陆访问 GitHub 时遇到的抽风问题，诸如访问缓慢、图片加载失败等等。
+通过使用 GitHub Actions 每周自动更新 hosts 文件，解决中国大陆访问 GitHub 时遇到的抽风问题，诸如访问缓慢、图片加载失败等等。
 
 # 目录
 
@@ -21,7 +21,7 @@
   - 默认返回所有响应中速度最快的 IP 地址
 
 > [!TIP]
-> Star 🌟 这个仓库，您将能在第一时间收到所有的更新和动态~
+> **Star 🌟 这个仓库**，您将能在第一时间收到所有的更新和动态~
 
 # 🛠️ 使用方法
 
@@ -178,8 +178,9 @@
 1. 项目默认支持返回所有响应中速度最快的 IP 地址。
 2. 使用只记录单一 IP 的 hosts 文件: 复制项目内的 [hosts_single](https://github.com/ittuann/GitHub-IP-hosts/blob/main/hosts_single) 文件内容即可。
 3. 在本地/海外服务器自部署项目: 在项目根目录使用终端执行 `make` 命令即可。
-4. 使用 jsDelivr CDN 加速下载 hosts 文件:
-   - [hosts](https://cdn.jsdelivr.net/gh/ittuann/GitHub-IP-hosts@main/hosts): `https://cdn.jsdelivr.net/gh/ittuann/GitHub-IP-hosts@main/hosts`
-   - [hosts_single](https://cdn.jsdelivr.net/gh/ittuann/GitHub-IP-hosts@main/hosts_single): `https://cdn.jsdelivr.net/gh/ittuann/GitHub-IP-hosts@main/hosts_single`
+4. 使用 jsDelivr CDN 加速下载 [hosts](https://cdn.jsdelivr.net/gh/ittuann/GitHub-IP-hosts@main/hosts) & [hosts_single](https://cdn.jsdelivr.net/gh/ittuann/GitHub-IP-hosts@main/hosts_single) 文件:
+   - `https://cdn.jsdelivr.net/gh/ittuann/GitHub-IP-hosts@main/hosts`
+   - `https://fastly.jsdelivr.net/gh/ittuann/GitHub-IP-hosts@main/hosts`
+   - `https://testingcf.jsdelivr.net/gh/ittuann/GitHub-IP-hosts@main/hosts`
 5. 通过 [SwitchHosts](https://github.com/oldj/SwitchHosts) 工具自动更新 hosts 文件。
-6. 完整的 workflows 工作流请参考 [GitHub Action](https://github.com/ittuann/GitHub-IP-hosts/actions) 的 CI/CD 配置。
+6. 完整的 workflows 工作流请参考 [GitHub Actions](https://github.com/ittuann/GitHub-IP-hosts/actions) 的 CI/CD 配置。
