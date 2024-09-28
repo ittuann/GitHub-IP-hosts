@@ -183,5 +183,6 @@
    - `https://cdn.jsdelivr.net/gh/ittuann/GitHub-IP-hosts@main/hosts`
    - `https://fastly.jsdelivr.net/gh/ittuann/GitHub-IP-hosts@main/hosts`
    - `https://testingcf.jsdelivr.net/gh/ittuann/GitHub-IP-hosts@main/hosts`
+   - `https://gcore.jsdelivr.net/gh/ittuann/GitHub-IP-hosts@main/hosts`
 5. 通过 [SwitchHosts](https://github.com/oldj/SwitchHosts) 工具自动更新 hosts 文件。
 6. 完整的 workflows 工作流请参考 [GitHub Actions](https://github.com/ittuann/GitHub-IP-hosts/actions) 的 CI/CD 配置。
