@@ -87,7 +87,7 @@ def main():
     print(host_content)
 
     logging.info("更新README.md")
-    update_readme("```\n" + host_content + "\n```")
+    update_readme("```\n" + host_content.strip() + "\n```")
 
 
 if __name__ == "__main__":

@@ -13,22 +13,22 @@ from datetime import datetime, timedelta, timezone
 from pathlib import Path
 
 
-def update_readme(status: str) -> None:
-    """更新README.md文件中的状态部分。
+def update_readme(hosts_content: str) -> None:
+    """更新README.md文件中的 hosts 部分。
 
     Parameters:
-        status (str): 要更新的状态字符串。
+        hosts_content (str): 要更新的状态字符串。
     """
     readme_path = Path("README.md")
 
     with open(readme_path, encoding="utf-8") as file:
-        content = file.read()
+        md_content = file.read()
 
     # 通过正则表达式找到并替换状态部分
     new_content = re.sub(
         r"<!-- hosts-all-start -->.*<!-- hosts-all-end -->",
-        f"<!-- hosts-all-start -->\n\n{status}\n\n<!-- hosts-all-end -->",
-        content,
+        f"<!-- hosts-all-start -->\n\n{hosts_content}\n\n<!-- hosts-all-end -->",
+        md_content,
         flags=re.DOTALL,
     )
 
