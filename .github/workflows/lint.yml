@@ -1,12 +1,14 @@
-name: Auto-update-hosts
+name: Lint and prettify
 
 on:
-  schedule:
-    - cron: "0 2 * * 1"
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
   workflow_dispatch:
 
 jobs:
-  update-hosts:
+  lint:
     runs-on: ubuntu-latest
 
     steps:
@@ -45,17 +47,11 @@ jobs:
       - name: Run Script
         run: poetry run python -m scripts.main --is_in_gha=true
 
-      - name: Auto Commit
-        if: github.event_name != 'pull_request' && github.ref == 'refs/heads/main'
-        run: |
-          git config user.name "github-actions[bot]"
-          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          CURRENT_TIME=$(date -u +"%Y-%m-%d" -d "+8 hours")
-          git add .
-          git commit -s -m "Auto update hosts ($CURRENT_TIME UTC+8)"
+      - name: Lint
+        run: make lint
 
-      - name: Push changes
-        if: github.event_name != 'pull_request'
-        uses: ad-m/github-push-action@master
-        with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
+      - name: per-commit hooks
+        run: make pre-commit
+
+      - name: Unit testing
+        run: make unit-tests
