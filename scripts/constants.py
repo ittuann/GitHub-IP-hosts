@@ -22,7 +22,6 @@ DNS_API_GOOGLE: str = "https://dns.google/resolve"
 GITHUB_URLS: list[str] = [
     "alive.github.com",
     "api.github.com",
-    "assets-cdn.github.com",
     "avatars.githubusercontent.com",
     "avatars0.githubusercontent.com",
     "avatars1.githubusercontent.com",

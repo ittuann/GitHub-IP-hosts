@@ -2,10 +2,10 @@
 
 [![GitHub Action][ci-image]][ci-url]
 
-[ci-image]: https://img.shields.io/github/actions/workflow/status/ittuann/GitHub-IP-hosts/workflow.yml?branch=main&label=Auto%20Build%20Status&logo=github&style=for-the-badge
+[ci-image]: https://img.shields.io/github/actions/workflow/status/ittuann/GitHub-IP-hosts/workflow.yml?branch=main&label=Auto%20CI%20Status&logo=github&style=for-the-badge
 [ci-url]: https://github.com/ittuann/GitHub-IP-hosts/actions
 
-通过使用 GitHub Actions 每周自动更新 hosts 文件，解决中国大陆访问 GitHub 时遇到的抽风问题，诸如访问缓慢、图片加载失败等等。
+通过使用 GitHub Actions CI 每周自动化维护最新的 hosts 文件，缓解中国大陆访问 GitHub 及其相关服务时遇到的网络抽风问题，改善诸如页面加载缓慢、网络连接不稳定、代码拉取失败、图片资源无法显示等等。
 
 # 目录
 
