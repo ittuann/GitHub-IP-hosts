@@ -48,19 +48,15 @@ def get_time_str() -> str:
     return date_str
 
 
-def get_hosts_head_str(hosts_name: str) -> str:
+def get_hosts_head_str() -> str:
     """获取hosts文件的头部字符串。
-
-    Parameters:
-        hosts_name (str): hosts文件的名称。
 
     Returns:
         str: hosts文件的头部字符串。
     """
     return f"""# GitHub IP hosts Start
 # Auto update time: {get_time_str()}
-# IP 可能会随时变化，请关注 GitHub 项目仓库，以获取最新数据
+# IP 可能会随时变化，为确保不错过重要更新，请前往 GitHub 项目页面 Star 这个仓库，以及时获取最新数据和信息
 # GitHub URL: https://github.com/ittuann/GitHub-IP-hosts
-# Update URL: https://raw.githubusercontent.com/ittuann/GitHub-IP-hosts/main/{hosts_name}
 
 """
