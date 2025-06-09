@@ -33,15 +33,14 @@
 
 ```
 # GitHub IP hosts Start
-# Auto update time: 2025-06-02 11:14:15 UTC+08:00
+# Auto update time: 2025-06-09 11:15:28 UTC+08:00
 # IP 可能会随时变化，请关注 GitHub 项目仓库，以获取最新数据
 # GitHub URL: https://github.com/ittuann/GitHub-IP-hosts
 # Update URL: https://raw.githubusercontent.com/ittuann/GitHub-IP-hosts/main/hosts
 
-140.82.112.25   alive.github.com
 140.82.114.25   alive.github.com
-140.82.112.5    api.github.com
-140.82.113.6    api.github.com
+140.82.114.26   alive.github.com
+140.82.116.6    api.github.com
 185.199.108.133 avatars.githubusercontent.com
 185.199.109.133 avatars.githubusercontent.com
 185.199.110.133 avatars.githubusercontent.com
@@ -74,40 +73,37 @@
 185.199.109.133 camo.githubusercontent.com
 185.199.110.133 camo.githubusercontent.com
 185.199.111.133 camo.githubusercontent.com
+140.82.112.22   central.github.com
 140.82.113.21   central.github.com
-140.82.114.21   central.github.com
 185.199.108.133 cloud.githubusercontent.com
 185.199.109.133 cloud.githubusercontent.com
 185.199.110.133 cloud.githubusercontent.com
 185.199.111.133 cloud.githubusercontent.com
-140.82.113.10   codeload.github.com
-140.82.114.10   codeload.github.com
-140.82.112.22   collector.github.com
-140.82.114.22   collector.github.com
-4.249.131.160   copilot-proxy.githubusercontent.com
+140.82.116.9    codeload.github.com
+140.82.113.21   collector.github.com
+138.91.182.224  copilot-proxy.githubusercontent.com
 185.199.108.133 desktop.githubusercontent.com
 185.199.109.133 desktop.githubusercontent.com
 185.199.110.133 desktop.githubusercontent.com
 185.199.111.133 desktop.githubusercontent.com
+140.82.113.21   education.github.com
 140.82.114.21   education.github.com
 185.199.108.133 favicons.githubusercontent.com
 185.199.109.133 favicons.githubusercontent.com
 185.199.110.133 favicons.githubusercontent.com
 185.199.111.133 favicons.githubusercontent.com
-140.82.112.4    gist.github.com
-140.82.113.4    gist.github.com
-16.15.176.88    github-cloud.s3.amazonaws.com
-16.15.178.69    github-cloud.s3.amazonaws.com
+140.82.116.4    gist.github.com
+16.15.177.3     github-cloud.s3.amazonaws.com
 16.15.193.27    github-cloud.s3.amazonaws.com
-16.15.216.0     github-cloud.s3.amazonaws.com
-16.15.177.70    github-com.s3.amazonaws.com
-16.15.178.11    github-com.s3.amazonaws.com
-16.15.192.226   github-com.s3.amazonaws.com
-16.15.200.31    github-com.s3.amazonaws.com
+16.182.106.105  github-cloud.s3.amazonaws.com
+3.5.12.71       github-cloud.s3.amazonaws.com
+16.15.177.167   github-com.s3.amazonaws.com
+16.15.177.212   github-com.s3.amazonaws.com
+16.15.193.168   github-com.s3.amazonaws.com
+16.15.201.127   github-com.s3.amazonaws.com
 192.0.66.2      github.blog
-140.82.112.3    github.com
-140.82.113.4    github.com
-140.82.114.17   github.community
+140.82.116.3    github.com
+140.82.113.18   github.community
 185.199.108.154 github.githubassets.com
 185.199.109.154 github.githubassets.com
 185.199.110.154 github.githubassets.com
@@ -124,12 +120,13 @@
 185.199.109.133 github.map.fastly.net
 185.199.110.133 github.map.fastly.net
 185.199.111.133 github.map.fastly.net
-140.82.114.17   githubcopilot.com
+140.82.112.17   githubcopilot.com
+140.82.112.18   githubcopilot.com
 185.199.108.153 githubstatus.com
 185.199.109.153 githubstatus.com
 185.199.110.153 githubstatus.com
 185.199.111.153 githubstatus.com
-140.82.112.25   live.github.com
+140.82.114.26   live.github.com
 185.199.108.133 media.githubusercontent.com
 185.199.109.133 media.githubusercontent.com
 185.199.110.133 media.githubusercontent.com
@@ -138,8 +135,8 @@
 185.199.109.133 objects.githubusercontent.com
 185.199.110.133 objects.githubusercontent.com
 185.199.111.133 objects.githubusercontent.com
-140.82.112.21   origin-tracker.githubusercontent.com
-140.82.112.22   origin-tracker.githubusercontent.com
+140.82.113.22   origin-tracker.githubusercontent.com
+140.82.114.22   origin-tracker.githubusercontent.com
 13.107.42.16    pipelines.actions.githubusercontent.com
 185.199.108.133 raw.githubusercontent.com
 185.199.109.133 raw.githubusercontent.com
