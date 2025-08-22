@@ -4,8 +4,8 @@ This script fetches and records the IP addresses of various GitHub-related URLs 
 
 Note:
     File   : get_ip.py
-    Author : ittuann <ittuann@outlook.com>
-    License: MIT License.
+    Author : ittuann <ittuann@outlook.com> (https://github.com/ittuann)
+    License: Apache-2.0 License.
 """
 
 import logging

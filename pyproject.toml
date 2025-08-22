@@ -2,8 +2,8 @@
 name = "github-ip-hosts"
 version = "0.1.1"
 description = "GitHub IP hosts"
-license = "MIT"
-authors = ["ittuann <ittuann@outlook.com>"]
+license = "Apache-2.0"
+authors = ["ittuann <ittuann@outlook.com> (https://github.com/ittuann)"]
 readme = "README.md"
 
 repository = "https://github.com/ittuann/GitHub-IP-hosts"
