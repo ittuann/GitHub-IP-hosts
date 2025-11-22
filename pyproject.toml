@@ -10,7 +10,7 @@ repository = "https://github.com/ittuann/GitHub-IP-hosts"
 
 [tool.poetry.dependencies]
 python = "^3.11"
-requests = {extras = ["socks"], version = "^2.32.3"}
+requests = {extras = ["socks"], version = "^2.32.4"}
 pydantic = "^2.8.2"
 ping3 = "^4.0.8"
 
