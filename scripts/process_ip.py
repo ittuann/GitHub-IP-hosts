@@ -74,7 +74,7 @@ def select_first_ip(ip_list: list[URLIPMapping]) -> list[URLIPMapping]:
     return [URLIPMapping(url, ip) for url, ip in first_ips.items()]
 
 
-def select_limited_ips(ip_list: list[URLIPMapping], max_ips_per_url: int = 4) -> list[URLIPMapping]:
+def select_limited_ips(ip_list: list[URLIPMapping], max_ips_per_url: int = 3) -> list[URLIPMapping]:
     """选择每个URL的限定数量的IP地址
 
     Parameters:

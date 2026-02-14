@@ -14,7 +14,7 @@ Note:
     License: Apache-2.0 License.
 
 Example:
-    $ poetry run python -m scripts.main --max_ips_per_url=4 --is_in_gha=False
+    $ poetry run python -m scripts.main --max_ips_per_url=3 --is_in_gha=False
 """
 
 import argparse
@@ -40,7 +40,7 @@ def main():
 
     parser = argparse.ArgumentParser(description="GitHub IP hosts")
     parser.add_argument("--is_in_gha", type=bool, default=False, help="指定是否在GitHub Actions环境中运行")
-    parser.add_argument("--max_ips_per_url", type=int, default=4, help="指定每个URL的最大IP地址数量")
+    parser.add_argument("--max_ips_per_url", type=int, default=3, help="指定每个URL的最大IP地址数量")
     args = parser.parse_args()
 
     logging.info("通过Cloudflare DNS-over-HTTPS 获取GitHub的IP地址")
