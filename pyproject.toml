@@ -18,7 +18,7 @@ ping3 = "^4.0.8"
 optional = true
 
 [tool.poetry.group.dev.dependencies]
-black = "^24.4.2"
+black = ">=24.4.2,<27.0.0"
 ruff = "^0.4.4"
 mypy = "^1.10.0"
 types-requests = "^2.32.0.20240712"
