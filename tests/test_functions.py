@@ -29,7 +29,7 @@ def test_urlipmapping_class():
 
 
 def test_constants():
-    """Test constants"""
+    """Test constants."""
     assert isinstance(DNS_API_GOOGLE, str)
     assert isinstance(DNS_API_CLOUDFLARE, str)
     assert isinstance(GITHUB_URLS, list)

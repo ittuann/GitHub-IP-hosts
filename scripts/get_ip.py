@@ -58,7 +58,7 @@ def validate_str_url(url: str):
         # 不会返回 HttpUrl 对象
         _ = HttpUrl(url=url)
     except ValidationError as e:
-        logging.error(f"无效的 URL: {url}, 错误信息: {str(e)}")
+        logging.error(f"无效的 URL: {url}, 错误信息: {e!s}")
         raise ValueError(f"无效的 URL: {url}") from e
 
 
@@ -137,7 +137,7 @@ def fetch_dns_records(dns_api: str, url: str, retries_num: int = 3) -> list[DNSR
 
 
 def get_all_ips(urls: list[str], dns_api: str, retries_num: int = 3) -> list[URLIPMapping]:
-    """获取指定URL列表的IP地址
+    """获取指定URL列表的IP地址。
 
     Parameters:
         urls (List[str]): 要解析的URL列表。

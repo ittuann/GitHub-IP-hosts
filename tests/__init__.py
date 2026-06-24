@@ -1,4 +1,4 @@
-"""__init__.py
+"""__init__.py.
 
 Note:
     File   : __init__.py

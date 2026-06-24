@@ -1,70 +1,66 @@
-[tool.poetry]
+[project]
 name = "github-ip-hosts"
 version = "0.1.1"
 description = "GitHub IP hosts"
+keywords = ["hosts", "GitHub", "ip"]
 license = "Apache-2.0"
-authors = ["ittuann <ittuann@outlook.com> (https://github.com/ittuann)"]
+authors = [{name = "ittuann", email = "ittuann@outlook.com"}]
+maintainers = [{name = "ittuann", email = "ittuann@outlook.com"}]
 readme = "README.md"
 
-repository = "https://github.com/ittuann/GitHub-IP-hosts"
+requires-python = ">=3.11"
 
-[tool.poetry.dependencies]
-python = "^3.11"
-requests = {extras = ["socks"], version = "^2.32.4"}
-pydantic = "^2.8.2"
-ping3 = "^4.0.8"
+dependencies = [
+  "requests[socks]>=2.34.2",
+  "pydantic>=2.13.4",
+  "ping3>=5.1.5"
+]
 
-[tool.poetry.group.dev]
-optional = true
+[project.urls]
+Homepage = "https://github.com/ittuann/GitHub-IP-hosts"
+Repository = "https://github.com/ittuann/GitHub-IP-hosts"
+Documentation = "https://github.com/ittuann/GitHub-IP-hosts?tab=readme-ov-file"
 
-[tool.poetry.group.dev.dependencies]
-black = "^24.4.2"
-ruff = "^0.4.4"
-mypy = "^1.10.0"
-types-requests = "^2.32.0.20240712"
-autoflake = "^2.3.1"
-pyupgrade = "^3.16.0"
-pre-commit = "^3.8.0"
-pytest = "^8.3.2"
-pytest-cov = "^5.0.0"
-pytest-mock = "^3.14.0"
+[project.optional-dependencies]
+dev = [
+  "black>=26.5.1",
+  "ruff>=0.15.19",
+  "mypy>=2.1.0",
+  "types-requests>=2.33.0.20260518",
+  "pre-commit>=4.6.0",
+  "pytest>=9.1.1",
+  "pytest-cov>=7.1.0",
+  "pytest-mock>=3.15.1"
+]
+
+[tool.poetry]
+package-mode = false
 
 [tool.black]
 line-length = 120
-
-[tool.mypy]
-pretty = true
-warn_redundant_casts = true
-
-[tool.autoflake]
-check-diff = true
 
 [tool.ruff]
 line-length = 120
 
 [tool.ruff.lint]
 select = [
-  # pycodestyle
-  "E",
-  # Pyflakes
-  "F",
-  # pyupgrade
-  "UP",
-  # flake8-bugbear
-  "B",
-  # flake8-simplify
-  "SIM",
-  # isort
-  "I",
+  "E",    # pycodestyle errors
+  "F",    # Pyflakes
+  "UP",   # pyupgrade
+  "B",    # Flake8-bugbear
+  "SIM",  # Flake8-simplify
+  "I",    # isort
+  "D",    # pydocstyle
+  "RUF",  # Ruff
 ]
-extend-select = [
-  # pydocstyle
-  "D",
-]
-ignore = ["F401", "UP009", "D415"]
+ignore = ["D415", "RUF001"]
 
 [tool.ruff.lint.pydocstyle]
 convention = "google"
+
+[tool.mypy]
+pretty = true
+warn_redundant_casts = true
 
 [tool.pytest.ini_options]
 addopts = "-ra --cov=./scripts --cov-report=term --cov-report=xml --cov-report=html"

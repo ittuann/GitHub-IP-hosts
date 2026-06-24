@@ -33,7 +33,9 @@ jobs:
 
       - name: Check virtual environment
         run: |
-          poetry --version
+          poetry about
+          poetry env info
+          poetry run python -V
           poetry check
 
       - name: Load cached venv
@@ -45,13 +47,16 @@ jobs:
             venv-${{ runner.os }}-${{ steps.setup-python.outputs.python-version }}-
 
       - name: Install dependencies
-        run: poetry install --with dev --no-root --no-interaction
+        run: poetry install --extras dev --no-interaction
 
       - name: Run Script
         run: poetry run python -m scripts.main --is_in_gha=true
 
       - name: Lint
         run: make lint
+
+      - name: Format
+        run: make format
 
       - name: per-commit hooks
         run: make pre-commit

@@ -1,7 +1,7 @@
 MAKEFLAGS = --warn-undefined-variables
 MAKEFLAGS += --no-builtin-rules
 
-.PHONY: run install lint pre-commi unit-tests
+.PHONY: run install lint format pre-commit unit-tests
 
 .DEFAULT_GOAL := run
 
@@ -9,14 +9,14 @@ run:
 	poetry run python -m scripts.main
 
 install:
-	poetry install --no-root
+	poetry install --extras dev
 
 lint:
-	poetry run black --color ./scripts
-	poetry run autoflake --remove-all-unused-imports --remove-unused-variables --recursive ./scripts
-	poetry run ruff check --fix ./scripts
-	poetry run mypy -p scripts
-	poetry run pyupgrade --py311-plus ./scripts/main.py
+	poetry run ruff check --fix
+	poetry run mypy scripts tests
+
+format:
+	poetry run black --color .
 
 pre-commit:
 	poetry run pre-commit run --verbose --all-files

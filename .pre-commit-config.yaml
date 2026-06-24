@@ -28,12 +28,6 @@ repos:
         language: system
         types: [python]
 
-      - id: autoflake
-        name: autoflake format
-        entry: poetry run autoflake --remove-all-unused-imports --remove-unused-variables
-        language: system
-        types: [python]
-
       - id: ruff
         name: ruff lint
         entry: poetry run ruff check --fix
@@ -46,9 +40,3 @@ repos:
         language: system
         types: [python]
         verbose: true
-
-      - id: pyupgrade
-        name: pyupgrade
-        entry: poetry run pyupgrade --py311-plus
-        language: system
-        types: [python]
