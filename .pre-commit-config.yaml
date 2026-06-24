@@ -3,17 +3,19 @@ default_language_version:
 
 repos:
   - repo: https://github.com/pre-commit/pre-commit-hooks
-    rev: v4.6.0
+    rev: v6.0.0
     hooks:
       - id: check-yaml
       - id: check-toml
-      - id: trailing-whitespace
       - id: end-of-file-fixer
+      - id: trailing-whitespace
       - id: mixed-line-ending
+      - id: check-symlinks
+      - id: check-case-conflict
+      - id: check-illegal-windows-names
       - id: check-merge-conflict
-      - id: check-added-large-files
       - id: detect-private-key
-      - id: check-docstring-first
+      - id: check-added-large-files
 
   - repo: https://github.com/python-poetry/poetry
     rev: "1.8.0"
