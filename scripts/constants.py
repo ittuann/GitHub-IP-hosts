@@ -57,6 +57,7 @@ GITHUB_URLS: list[str] = [
     "github.global.ssl.fastly.net",
     "github.io",
     "github.map.fastly.net",
+    "githubapp.com",
     # "githubassets.com",
     "githubcopilot.com",
     # "githubusercontent.com",
