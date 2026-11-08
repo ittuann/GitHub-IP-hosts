@@ -16,8 +16,7 @@ requires-python = ">=3.11"
 
 dependencies = [
   "requests[socks]>=2.34.2",
-  "pydantic>=2.13.4",
-  "ping3>=5.1.5"
+  "pydantic>=2.13.4"
 ]
 
 [project.urls]

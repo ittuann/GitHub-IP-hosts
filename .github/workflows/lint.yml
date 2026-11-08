@@ -1,4 +1,4 @@
-name: Lint and prettify
+name: Lint and Format
 
 on:
   push:
@@ -45,7 +45,7 @@ jobs:
         run: uv sync --frozen --extra dev
 
       - name: Run Script
-        run: uv run python -m scripts.main --is_in_gha=true
+        run: uv run python -m scripts.main
 
       - name: Lint
         run: make lint

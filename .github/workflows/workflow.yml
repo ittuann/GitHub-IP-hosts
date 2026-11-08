@@ -44,7 +44,7 @@ jobs:
         run: uv sync --frozen --extra dev
 
       - name: Run Script
-        run: uv run python -m scripts.main --is_in_gha=true
+        run: uv run python -m scripts.main
 
       - name: Auto Commit
         if: github.event_name != 'pull_request' && github.ref == 'refs/heads/main'

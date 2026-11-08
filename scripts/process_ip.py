@@ -9,48 +9,84 @@ Note:
 """
 
 import logging
-
-from ping3 import ping  # type: ignore
+import socket
+import time
 
 from scripts.get_ip import URLIPMapping
 
+TCP_PORT = 443
+TCP_TIMEOUT = 2.0
+TCP_ATTEMPTS = 3
 
-def select_best_ip(ip_list: list[URLIPMapping]) -> list[URLIPMapping]:
-    """选择每个URL的最佳IP地址。
+
+def tcp_latency(
+    ip: str, port: int = TCP_PORT, timeout: float = TCP_TIMEOUT, attempts: int = TCP_ATTEMPTS
+) -> float | None:
+    """测量到指定IP的TCP连接耗时 (秒)。
 
     Parameters:
-        ip_list (List[Dict[str, str]]): 包含URL和IP地址的字典列表。
+        ip (str): 目标IP地址。
+        port (int): 目标端口 默认为443。
+        timeout (float): 单次连接超时时间 (秒)。
+        attempts (int): 尝试次数 取成功连接中的最小耗时。
 
     Returns:
-        List[Dict[str, str]]: 包含URL和最佳IP地址的字典列表。
+        float | None: 最小连接耗时 全部失败时返回None。
     """
-    best_ips: list[URLIPMapping] = []
-    url_respond_ips: dict[str, list[str]] = {}
+    best: float | None = None
+    for _ in range(attempts):
+        start = time.perf_counter()
+        try:
+            with socket.create_connection((ip, port), timeout=timeout):
+                elapsed = time.perf_counter() - start
+        except OSError:
+            continue
+        if best is None or elapsed < best:
+            best = elapsed
+    return best
 
-    # 存储每个URL对应的所有IP地址
+
+def sort_ips_by_latency(ip_list: list[URLIPMapping]) -> list[URLIPMapping]:
+    """按TCP连接耗时对每个URL的所有IP地址从快到慢排序 不丢弃任何IP。
+
+    无法连接的IP (以及DNS解析失败的占位项) 排在该URL的最后 并保持原有相对顺序。
+    结果按URL排序 同一URL内按耗时升序。URL下只有一个IP时原样保留。
+
+    Parameters:
+        ip_list (List[URLIPMapping]): 包含URL和IP地址的列表。
+
+    Returns:
+        List[URLIPMapping]: 排序后的列表 包含输入中的所有记录。
+    """
+    ips_per_url: dict[str, list[str]] = {}
     for record in ip_list:
-        if record.url not in url_respond_ips:
-            url_respond_ips[record.url] = []
-        url_respond_ips[record.url].append(record.ip)
+        ips = ips_per_url.setdefault(record.url, [])
+        if record.ip not in ips:
+            ips.append(record.ip)
 
-    # 为每个URL选择最佳IP地址
-    for url, ips in url_respond_ips.items():
-        best_ip: str | None = None
-        lowest_latency: float = float("inf")
+    result: list[URLIPMapping] = []
+    for url in sorted(ips_per_url):
+        ips = ips_per_url[url]
+        latencies: dict[str, float] = {}
         for ip in ips:
-            latency = ping(ip, timeout=1)
-            logging.info(f"{url} - {ip}: 延迟: {latency}")
-            if latency is not None and latency < lowest_latency:
-                lowest_latency = latency
-                best_ip = ip
+            # DNS解析失败时的占位项 (如 "# ") 不是真实IP 无需测速
+            if ip.strip().startswith("#"):
+                continue
+            latency = tcp_latency(ip)
+            logging.info(f"{url} - {ip}: TCP {TCP_PORT} 连接耗时: {latency}")
+            if latency is not None:
+                latencies[ip] = latency
 
-        if best_ip is not None:
-            best_ips.append(URLIPMapping(url, best_ip))
-            logging.info(f"{url} 最佳IP地址: {best_ip}, 延迟: {lowest_latency}")
+        # sorted 是稳定排序 不可达的IP保持原顺序排在最后
+        ordered = sorted(ips, key=lambda ip: latencies.get(ip, float("inf")))
+        if latencies:
+            best = ordered[0]
+            logging.info(f"{url} 最佳IP地址: {best}, 延迟: {latencies[best]}")
         else:
-            logging.warning(f"{url} 无法找到最佳IP地址")
+            logging.warning(f"{url} 无法找到可连接的IP地址")
+        result.extend(URLIPMapping(url, ip) for ip in ordered)
 
-    return best_ips
+    return result
 
 
 def select_first_ip(ip_list: list[URLIPMapping]) -> list[URLIPMapping]:
@@ -114,34 +150,6 @@ def merge_deduplicate_ips(ips1: list[URLIPMapping], ips2: list[URLIPMapping]) ->
 
     sorted_ips: list[tuple[str, str]] = sorted(combined_ips, key=lambda x: (x[0], x[1]))
     return [URLIPMapping(url, ip) for url, ip in sorted_ips]
-
-
-def reorder_ips_with_best_first(ips_merged: list[URLIPMapping], ips_best: list[URLIPMapping]) -> list[URLIPMapping]:
-    """重新排序IP地址列表 将每个URL的最佳IP地址放置在前面。
-
-    Parameters:
-        ips_merged (List[Dict[str, str]]): 合并并去重后的IP地址列表 按URL和IP字典序排序。
-        ips_best (List[Dict[str, str]]): 每个URL的最佳IP地址列表。
-
-    Returns:
-        List[Dict[str, str]]: 重新排序后的IP地址列表 每个URL的最佳IP地址位于前面。
-    """
-    url_to_best_ip: dict[str, str] = {}
-    for record in ips_best:
-        url_to_best_ip.update(record.to_dict())
-    ips_res: list[URLIPMapping] = []
-
-    # 先添加最佳IP
-    for record in ips_merged:
-        if record.url in url_to_best_ip:
-            ips_res.append(URLIPMapping(record.url, url_to_best_ip[record.url]))
-            del url_to_best_ip[record.url]
-    # 再添加其他IP
-    for record in ips_merged:
-        if record not in ips_res:
-            ips_res.append(record)
-    ips_res = sorted(ips_res, key=lambda x: x.url)
-    return ips_res
 
 
 def format_host_strings(ip_list: list[URLIPMapping]) -> str:

@@ -29,12 +29,13 @@ class DNSRecord(BaseModel):
 class URLIPMapping:
     """Class for storing URL and IP address mappings."""
 
-    def __init__(self, url: str, ip: str):
-        """Initialize the URL and IP address mapping."""
-        if not isinstance(url, str) or not isinstance(ip, str):
+    url: str
+    ip: str
+
+    def __post_init__(self):
+        """Validate the field types."""
+        if not isinstance(self.url, str) or not isinstance(self.ip, str):
             raise TypeError("url and ip must be of type str")
-        self.url = url
-        self.ip = ip
 
     def to_dict(self) -> dict[str, str]:
         """Convert the URLIPMapping object to a dictionary."""
@@ -111,14 +112,16 @@ def fetch_dns_records(dns_api: str, url: str, retries_num: int = 3) -> list[DNSR
             records = [DNSRecord(**answer) for answer in data.get("Answer", []) if answer["type"] == 1]
 
             # 验证得到的每个IP地址
+            valid_records: list[DNSRecord] = []
             for record in records:
                 try:
                     validate_ip(record.data)
                 except ValueError as e:
                     logging.warning(f"无效的 IP 地址: {record.data} - {e}")
-                    records.remove(record)
+                else:
+                    valid_records.append(record)
 
-            return records
+            return valid_records
 
         except requests.Timeout as e:
             logging.warning(f"请求超时 ({attempt_num}/{retries_num}): {e}")

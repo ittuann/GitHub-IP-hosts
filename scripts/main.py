@@ -14,7 +14,7 @@ Note:
     License: Apache-2.0 License.
 
 Example:
-    $ uv run python -m scripts.main --max_ips_per_url=3 --is_in_gha=False
+    $ uv run python -m scripts.main --max_ips_per_url=3
 """
 
 import argparse
@@ -25,10 +25,9 @@ from scripts.get_ip import get_all_ips
 from scripts.process_ip import (
     format_host_strings,
     merge_deduplicate_ips,
-    reorder_ips_with_best_first,
-    select_best_ip,
     select_first_ip,
     select_limited_ips,
+    sort_ips_by_latency,
 )
 from scripts.update_readme import get_hosts_head_str, update_readme
 
@@ -38,7 +37,6 @@ def main():
     logging.basicConfig(level=logging.INFO, format="%(asctime)s - %(levelname)s - %(message)s")
 
     parser = argparse.ArgumentParser(description="GitHub IP hosts")
-    parser.add_argument("--is_in_gha", type=bool, default=False, help="指定是否在GitHub Actions环境中运行")
     parser.add_argument("--max_ips_per_url", type=int, default=3, help="指定每个URL的最大IP地址数量")
     args = parser.parse_args()
 
@@ -51,19 +49,11 @@ def main():
     logging.info("合并并去重两个 API 的 IP 地址")
     ips_merged = merge_deduplicate_ips(ips_cloudflare, ips_google)
 
-    if not args.is_in_gha:
-        logging.info("选择每个 URL 的最佳 IP 地址")
-        ips_single = select_best_ip(ips_merged)
+    logging.info("按 TCP 443 连接耗时对每个 URL 的 IP 地址从快到慢排序")
+    ips_res = sort_ips_by_latency(ips_merged)
 
-        logging.info("重新排序 IP 地址列表")
-        ips_res = reorder_ips_with_best_first(ips_merged, ips_single)
-    else:
-        logging.info("在 GitHub Actions 环境中运行")
-        # https://github.com/actions/runner-images/issues/1519#issuecomment-752644218
-        # GitHub runners are placed in Azure. Ping doesn't work in azure by design.
-        ips_single = select_first_ip(ips_merged)
-
-        ips_res = ips_merged
+    # 排序后每个 URL 的第一个 IP 即为最佳 IP
+    ips_single = select_first_ip(ips_res)
 
     logging.info("格式化 hosts_single 字符串")
     host_single_strings = format_host_strings(ips_single)
