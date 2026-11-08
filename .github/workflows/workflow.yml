@@ -35,7 +35,7 @@ jobs:
       - name: Load cached venv
         uses: actions/cache@v5
         with:
-          path: ~/.venv
+          path: .venv
           key: venv-${{ runner.os }}-${{ steps.setup-python.outputs.python-version }}-${{ hashFiles('**/uv.lock') }}
           restore-keys: |
             venv-${{ runner.os }}-${{ steps.setup-python.outputs.python-version }}-

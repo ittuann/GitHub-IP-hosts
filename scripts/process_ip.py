@@ -53,10 +53,10 @@ def sort_ips_by_latency(ip_list: list[URLIPMapping]) -> list[URLIPMapping]:
     结果按URL排序 同一URL内按耗时升序。URL下只有一个IP时原样保留。
 
     Parameters:
-        ip_list (List[URLIPMapping]): 包含URL和IP地址的列表。
+        ip_list (list[URLIPMapping]): 包含URL和IP地址的列表。
 
     Returns:
-        List[URLIPMapping]: 排序后的列表 包含输入中的所有记录。
+        list[URLIPMapping]: 排序后的列表 包含输入中的所有记录。
     """
     ips_per_url: dict[str, list[str]] = {}
     for record in ip_list:
@@ -96,10 +96,10 @@ def select_first_ip(ip_list: list[URLIPMapping]) -> list[URLIPMapping]:
     https://github.com/actions/runner-images/issues/1519#issuecomment-752644218
 
     Parameters:
-        ip_list (List[Dict[str, str]]): 包含URL和IP地址的字典列表。
+        ip_list (list[URLIPMapping]): 包含URL和IP地址的列表。
 
     Returns:
-        List[Dict[str, str]]: 包含URL和第一个IP地址的字典列表。
+        list[URLIPMapping]: 每个URL仅保留第一个IP地址的列表。
     """
     first_ips: dict[str, str] = {}
     for record in ip_list:
@@ -114,11 +114,11 @@ def select_limited_ips(ip_list: list[URLIPMapping], max_ips_per_url: int = 3) ->
     """选择每个URL的限定数量的IP地址
 
     Parameters:
-        ip_list (List[Dict[str, str]]): 包含URL和IP地址的字典列表。
-        max_ips_per_url (int): 每个URL允许的最大IP地址数量 默认为4。
+        ip_list (list[URLIPMapping]): 包含URL和IP地址的列表。
+        max_ips_per_url (int): 每个URL允许的最大IP地址数量 默认为3。
 
     Returns:
-        List[Dict[str, str]]: 根据限定数量选择的URL和IP地址的字典列表。
+        list[URLIPMapping]: 每个URL最多保留 max_ips_per_url 个IP地址的列表。
     """
     ips_per_url: dict[str, list[str]] = {}
     for record in ip_list:
@@ -139,11 +139,11 @@ def merge_deduplicate_ips(ips1: list[URLIPMapping], ips2: list[URLIPMapping]) ->
     """合并并去重从两个API得到的IP地址。
 
     Parameters:
-        ips1 (List[Dict[str, str]]): 从第一个API得到的IP地址列表。
-        ips2 (List[Dict[str, str]]): 从第二个API得到的IP地址列表。
+        ips1 (list[URLIPMapping]): 从第一个API得到的IP地址列表。
+        ips2 (list[URLIPMapping]): 从第二个API得到的IP地址列表。
 
     Returns:
-        List[Dict[str, str]]: 合并并去重后按URL排序的IP地址列表。
+        list[URLIPMapping]: 合并并去重后按URL和IP排序的列表。
     """
     combined_ips: set[tuple[str, str]] = {(record.url, record.ip) for record in ips1}
     combined_ips.update({(record.url, record.ip) for record in ips2})
@@ -153,10 +153,10 @@ def merge_deduplicate_ips(ips1: list[URLIPMapping], ips2: list[URLIPMapping]) ->
 
 
 def format_host_strings(ip_list: list[URLIPMapping]) -> str:
-    """将列表中的字典中的IP地址和URL转换为host格式的字符串 并确保每个URL的开头对齐。
+    """将列表中的IP地址和URL转换为host格式的字符串 并确保每个URL的开头对齐。
 
     Parameters:
-        ip_list (List[Dict[str, str]]): 包含URL和IP地址的字典列表。
+        ip_list (list[URLIPMapping]): 包含URL和IP地址的列表。
 
     Returns:
         str: 包含host格式的字符串。

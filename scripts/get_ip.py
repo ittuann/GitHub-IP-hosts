@@ -90,7 +90,7 @@ def fetch_dns_records(dns_api: str, url: str, retries_num: int = 3) -> list[DNSR
         RuntimeError: 无法完成GET请求。
 
     Returns:
-        List[DNSRecord]: 包含A记录的字典列表。
+        list[DNSRecord]: 包含A记录的列表。
     """
     try:
         validate_str_url(dns_api)
@@ -144,15 +144,12 @@ def get_all_ips(urls: list[str], dns_api: str, retries_num: int = 3) -> list[URL
     """获取指定URL列表的IP地址。
 
     Parameters:
-        urls (List[str]): 要解析的URL列表。
+        urls (list[str]): 要解析的URL列表。
         dns_api (str): DNS-over-HTTPS API的URL。
         retries_num (int): 最大重试次数。
 
-    Raises:
-        RuntimeError: 无法获取记录。
-
     Returns:
-        List[Dict[str, str]]: 包含URL和IP地址的字典列表。
+        list[URLIPMapping]: 包含URL和IP地址的列表。
     """
     results: list[URLIPMapping] = []
 

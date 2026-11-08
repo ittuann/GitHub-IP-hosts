@@ -30,31 +30,34 @@ jobs:
           # Install a specific version of uv.
           version: "0.12.1"
 
-      - name: Check virtual environment
+      - name: Check Virtual Environment
         run: uv version
 
-      - name: Load cached venv
+      - name: Load Cached Venv
         uses: actions/cache@v5
         with:
-          path: ~/.venv
+          path: .venv
           key: venv-${{ runner.os }}-${{ steps.setup-python.outputs.python-version }}-${{ hashFiles('**/uv.lock') }}
           restore-keys: |
             venv-${{ runner.os }}-${{ steps.setup-python.outputs.python-version }}-
 
-      - name: Install dependencies
+      - name: Install Dependencies
         run: uv sync --frozen --extra dev
 
       - name: Run Script
         run: uv run python -m scripts.main
 
-      - name: Lint
-        run: make lint
+      - name: Lint Check
+        run: uv run ruff check
 
-      - name: Format
-        run: make format
+      - name: Type Check
+        run: uv run mypy scripts tests
 
-      - name: per-commit hooks check
+      - name: Format Check
+        run: uv run black --check --diff --color .
+
+      - name: Per-commit hooks Check
         run: make pre-commit
 
-      - name: Unit testing
+      - name: Unit Testing
         run: make unit-tests
