@@ -154,7 +154,7 @@ def format_host_strings(ip_list: list[URLIPMapping]) -> str:
         str: 包含host格式的字符串。
     """
     host_strings: list[str] = []
-    max_ip_length = max(len(record.ip) for record in ip_list)
+    max_ip_length = max((len(record.ip) for record in ip_list), default=0)
     for record in ip_list:
         host_format = f"{record.ip.ljust(max_ip_length)} {record.url}"
         host_strings.append(host_format)

@@ -2,7 +2,8 @@ name: Auto-update-hosts
 
 on:
   schedule:
-    - cron: "0 2 * * 1"
+    # UTC+8 Monday 07:00 = UTC Sunday 23:00
+    - cron: "0 23 * * 0"
   workflow_dispatch:
 
 permissions:
@@ -56,6 +57,6 @@ jobs:
 
       - name: Push changes
         if: github.event_name != 'pull_request'
-        uses: ad-m/github-push-action@master
+        uses: ad-m/github-push-action@v1
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}

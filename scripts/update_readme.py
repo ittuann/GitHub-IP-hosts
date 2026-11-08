@@ -10,7 +10,11 @@ Note:
 
 import re
 from datetime import datetime, timedelta, timezone
-from pathlib import Path
+
+from scripts.constants import PROJECT_ROOT
+
+HOSTS_START_MARK = "<!-- hosts-all-start -->"
+HOSTS_END_MARK = "<!-- hosts-all-end -->"
 
 
 def update_readme(hosts_content: str) -> None:
@@ -18,19 +22,26 @@ def update_readme(hosts_content: str) -> None:
 
     Parameters:
         hosts_content (str): 要更新的状态字符串。
+
+    Raises:
+        ValueError: README.md 中找不到 hosts 标记。
     """
-    readme_path = Path("README.md")
+    readme_path = PROJECT_ROOT / "README.md"
 
     with open(readme_path, encoding="utf-8") as file:
         md_content = file.read()
 
-    # 通过正则表达式找到并替换状态部分
-    new_content = re.sub(
-        r"<!-- hosts-all-start -->.*<!-- hosts-all-end -->",
-        f"<!-- hosts-all-start -->\n\n{hosts_content}\n\n<!-- hosts-all-end -->",
+    # 通过正则表达式找到并替换 hosts 部分
+    replacement = f"{HOSTS_START_MARK}\n\n{hosts_content}\n\n{HOSTS_END_MARK}"
+    new_content, count = re.subn(
+        rf"{re.escape(HOSTS_START_MARK)}.*?{re.escape(HOSTS_END_MARK)}",
+        lambda _: replacement,
         md_content,
+        count=1,
         flags=re.DOTALL,
     )
+    if count == 0:
+        raise ValueError(f"{readme_path} 中找不到 {HOSTS_START_MARK} 和 {HOSTS_END_MARK} 标记")
 
     with open(readme_path, "w", encoding="utf-8") as file:
         file.write(new_content)

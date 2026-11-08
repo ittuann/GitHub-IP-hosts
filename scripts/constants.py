@@ -6,12 +6,19 @@ Constants:
     DNS_API_CLOUDFLARE (str): URL for Cloudflare DNS-over-HTTPS API.
     DNS_API_GOOGLE (str): URL for Google DNS-over-HTTPS API.
     GITHUB_URLS (List[str]): List of GitHub-related URLs.
+    PROJECT_ROOT (Path): Project root directory.
 
 Note:
     File   : constants.py
     Author : ittuann <ittuann@outlook.com> (https://github.com/ittuann)
     License: Apache-2.0 License.
 """
+
+from pathlib import Path
+
+# 项目根目录 (scripts 的上一级)
+# 不依赖运行时所在的工作目录
+PROJECT_ROOT: Path = Path(__file__).resolve().parent.parent
 
 # Cloudflare DNS-over-HTTPS API
 DNS_API_CLOUDFLARE: str = "https://cloudflare-dns.com/dns-query"

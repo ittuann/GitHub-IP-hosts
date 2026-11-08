@@ -19,9 +19,8 @@ Example:
 
 import argparse
 import logging
-from pathlib import Path
 
-from scripts.constants import DNS_API_CLOUDFLARE, DNS_API_GOOGLE, GITHUB_URLS
+from scripts.constants import DNS_API_CLOUDFLARE, DNS_API_GOOGLE, GITHUB_URLS, PROJECT_ROOT
 from scripts.get_ip import get_all_ips
 from scripts.process_ip import (
     format_host_strings,
@@ -70,7 +69,7 @@ def main():
     host_single_strings = format_host_strings(ips_single)
 
     logging.info("写入 hosts_single 文件")
-    with open(Path("hosts_single"), "w", encoding="utf-8") as file:
+    with open(PROJECT_ROOT / "hosts_single", "w", encoding="utf-8") as file:
         file.write(get_hosts_head_str() + host_single_strings + "\n\n# GitHub IP hosts End\n")
 
     logging.info("限制每个 URL 的限定数量的 IP 地址")
@@ -81,7 +80,7 @@ def main():
 
     logging.info("写入 hosts 文件")
     host_content = get_hosts_head_str() + host_strings + "\n\n# GitHub IP hosts End\n"
-    with open(Path("hosts"), "w", encoding="utf-8") as file:
+    with open(PROJECT_ROOT / "hosts", "w", encoding="utf-8") as file:
         file.write(host_content)
 
     print(host_content)

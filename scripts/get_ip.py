@@ -104,6 +104,7 @@ def fetch_dns_records(dns_api: str, url: str, retries_num: int = 3) -> list[DNSR
                 dns_api,
                 headers={"accept": "application/dns-json"},
                 params={"name": url, "type": "A"},
+                timeout=10,
             )
             response.raise_for_status()  # 检查请求是否成功
             data = response.json()
